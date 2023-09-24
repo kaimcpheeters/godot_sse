@@ -8,6 +8,7 @@ http.createServer((req, res) => {
 
   // send an event every second
   setInterval(() => {
+    res.write('event: example\n');
     res.write(`data: ${new Date().toISOString()}\n\n`);
   }, 1000);
 }).listen(5000);
