@@ -8,7 +8,7 @@ func _ready():
 	var sub_url = ""
 	print('Connecting to:', config.url + sub_url)
 	$HTTPSSEClient.connect("connected", self, "on_connected")
-	$HTTPSSEClient.connect_to_host(config.url, sub_url, 80, false, false)
+	$HTTPSSEClient.connect_to_host("localhost", "/", 5000, false, false)
 
 func on_connected():
 	$HTTPSSEClient.connect("new_sse_event", self, "on_new_sse_event")
