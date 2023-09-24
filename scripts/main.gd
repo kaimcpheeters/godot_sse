@@ -14,5 +14,5 @@ func on_connected():
 	$HTTPSSEClient.connect("new_sse_event", self, "on_new_sse_event")
 	
 func on_new_sse_event(headers, event, data):
-	print("event is: " + event)
-	print("data is: " + data) 
+	print("event: " + event)
+	print("data: " + data) 
