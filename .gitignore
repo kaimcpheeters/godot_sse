@@ -1,15 +1,14 @@
-.vercel
-*.log
-*.pyc
-__pycache__
-db.sqlite3
-media
+# Additional files that you can ignore: 
+# - https://github.com/github/gitignore/blob/master/Godot.gitignore
 
-# Environments
-.env  
-.venv 
-env/ 
-venv/ 
-ENV/ 
-env.bak/ 
-venv.bak/ 
+# Godot-specific ignores
+.import/
+
+# Builds/export directory
+builds
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# OSX 
+.DS_Store
