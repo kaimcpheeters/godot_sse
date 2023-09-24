@@ -9,4 +9,7 @@
 
    The server should then be running at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 
-2. **Running the Godot Game**: Once the SSE server is up and running, you can start the Godot game as you normally would. It should log SSE events.
+   ![image](https://github.com/kaimcpheeters/godot_sse/assets/28831437/ba8bcd2c-48bd-459f-b55f-21a28f8c3f29)
+
+
+3. **Running the Godot Game**: Once the SSE server is up and running, you can start the Godot game as you normally would. It should log the SSE events.
