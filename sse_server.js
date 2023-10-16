@@ -10,7 +10,9 @@ http.createServer((req, res) => {
   res.write('event: stream-open\n\n');
 
   // send an event every second
-  setInterval(() => {
-    res.write(`event: example data: "${new Date().toISOString()}"\n\n`);
+  let intervalId = setInterval(() => {
+    const eventData = new Date().toISOString();
+    res.write(`event: example\n`);
+    res.write(`data: "${eventData}"\n\n`);
   }, 1000);
 }).listen(5000);
