@@ -89,23 +89,24 @@ func _process(delta):
 					response_body.resize(0)
 
 func get_event_data(body : String) -> Dictionary:
-	var result = {}
+	var result = {
+		"event": "",
+		"data": ""
+	}
+	if body.strip_edges() == "":
+		push_error("Error: Received an empty body.")
+		return result
 	var event_idx = body.find(event_tag)
 	if event_idx == -1:
 		result["event"] = continue_internal
 		return result
-	assert(event_idx != -1)
 	var data_idx = body.find(data_tag, event_idx + event_tag.length())
-	assert(data_idx != -1)
-	var event = body.substr(event_idx, data_idx)
-	event = event.replace(event_tag, "").strip_edges()
-	assert(event)
-	assert(event.length() > 0)
+	var event = body.substr(event_idx + event_tag.length(), data_idx - event_idx - event_tag.length()).strip_edges()
 	result["event"] = event
-	var data = body.right(data_idx + data_tag.length()).strip_edges()
-	assert(data)
-	assert(data.length() > 0)
-	result["data"] = data
+	if data_idx != -1:
+		result["data"] = body.right(data_idx + data_tag.length()).strip_edges()
+	if result["data"] == "" and result["event"] != "keep-alive":
+		print("Warning: Empty data for event: " + result["event"])
 	return result
 
 func _exit_tree():
