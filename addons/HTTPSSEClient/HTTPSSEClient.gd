@@ -96,15 +96,14 @@ func get_event_data(body : String) -> Dictionary:
 	if body.strip_edges() == "":
 		push_error("Error: Received an empty body.")
 		return result
-	var event_idx = body.find(event_tag)
-	if event_idx == -1:
+	var lines = body.split("\n")
+	for line in lines:
+		if line.begins_with(event_tag):
+			result["event"] = line.substr(event_tag.length()).strip_edges()
+		elif line.begins_with(data_tag):
+			result["data"] = line.substr(data_tag.length()).strip_edges()
+	if result["event"] == "":
 		result["event"] = continue_internal
-		return result
-	var data_idx = body.find(data_tag, event_idx + event_tag.length())
-	var event = body.substr(event_idx + event_tag.length(), data_idx - event_idx - event_tag.length()).strip_edges()
-	result["event"] = event
-	if data_idx != -1:
-		result["data"] = body.right(data_idx + data_tag.length()).strip_edges()
 	if result["data"] == "" and result["event"] != "keep-alive":
 		print("Warning: Empty data for event: " + result["event"])
 	return result
